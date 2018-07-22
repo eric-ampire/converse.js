@@ -4,4 +4,10 @@
             font-weight: bold;
         }
     }
+    .fingerprints {
+        display: flex;
+        justify-content: space-between;
+        font-size: 95%;
+        line-height: $btn-line-height + $input-btn-padding-y;
+    }
 }

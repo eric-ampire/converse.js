@@ -7213,6 +7213,9 @@ body.reset {
 @media screen and (max-height: 450px) {
   #conversejs {
     left: 0; } }
+#conversejs .btn--small {
+  font-size: 80%;
+  font-weight: normal; }
 #conversejs form .form-group {
   margin-bottom: 2em; }
 #conversejs form .form-check-label {
@@ -7291,6 +7294,11 @@ body.reset {
 
 #conversejs #user-profile-modal label {
   font-weight: bold; }
+#conversejs .fingerprints {
+  display: flex;
+  justify-content: space-between;
+  font-size: 95%;
+  line-height: 1.875rem; }
 
 #conversejs .chatbox-navback {
   display: none; }

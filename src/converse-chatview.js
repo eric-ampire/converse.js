@@ -245,13 +245,20 @@
                 initialize () {
                     _converse.BootstrapModal.prototype.initialize.apply(this, arguments);
                     this.model.on('contactAdded', this.registerContactEventHandlers, this);
+                    this.model.on('fingerprints', this.render, this);
+
                     this.registerContactEventHandlers();
+                    _converse.emit('userDetailsModalInitialized', this.model);
                 },
 
                 toHTML () {
                     return tpl_user_details_modal(_.extend(
                         this.model.toJSON(),
                         this.model.vcard.toJSON(), {
+                        '_': _,
+                        '__': __,
+                        'has_omemo': _converse.pluggable.plugins['converse-omemo'].enabled(),
+                        'devicelist': _converse.devicelists && _converse.devicelists.get(this.model.get('jid')) || {},
                         'allow_contact_removal': _converse.allow_contact_removal,
                         'alt_profile_image': __("The User's Profile Image"),
                         'display_name': this.model.getDisplayName(),

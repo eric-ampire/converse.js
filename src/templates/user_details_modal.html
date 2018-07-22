@@ -1,8 +1,8 @@
-<div class="modal fade" id="user-profile-modal" tabindex="-1" role="dialog" aria-labelledby="user-profile-modal-label" aria-hidden="true">
+<div class="modal fade" id="user-details-modal" tabindex="-1" role="dialog" aria-labelledby="user-details-modal-label" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="user-profile-modal-label">{{{o.display_name}}}</h5>
+                <h5 class="modal-title" id="user-details-modal-label">{{{o.display_name}}}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="{{{o.label_close}}}"><span aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body">
@@ -26,6 +26,30 @@
                 {[ } ]}
                 {[ if (o.role) { ]}
                 <p><label>{{{o.label_role}}}:</label>&nbsp;{{{o.role}}}</p>
+                {[ } ]}
+
+                {[ if (o.has_omemo) { ]}
+                    <hr>
+                    <ul class="list-group">
+                        <li class="list-group-item active">{{{o.__('OMEMO Fingerprints')}}}</li>
+                        {[ if (!o.devicelist.devices) { ]}
+                            <li class="list-group-item"><span class="spinner fa fa-spinner centered"/></li>
+                        {[ } ]}
+                        {[ if (o.devicelist.devices) { ]}
+                            {[ o.devicelist.devices.each(function (device) { ]}
+                                <li class="fingerprints list-group-item">{{{device.get('bundle').fingerprint}}}
+                                    <div class="btn-group btn-group-toggle">
+                                        <label class="btn btn-primary active btn--small">
+                                            <input type="radio" name="options" id="option1" autocomplete="off" checked> Trusted
+                                        </label>
+                                        <label class="btn btn-secondary btn--small">
+                                            <input type="radio" name="options" id="option2" autocomplete="off"> Untrusted
+                                        </label>
+                                    </div>
+                                </li>
+                            {[ }); ]}
+                        {[ } ]}
+                    </ul>
                 {[ } ]}
             </div>
             <div class="modal-footer">
